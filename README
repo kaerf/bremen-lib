@@ -1,3 +1,7 @@
 bremen-lib
 
-OpenData Hackday Bremen (2011-11-19)
+A django project, created at OpenData Hackday Bremen (2011-11-19)
+
+Using https://wiki.openstreetmap.org/wiki/OpenLayers_Marker_Example
+and library open data from
+http://daten.bremen.de/sixcms/detail.php?gsid=bremen236.c.3743.de&asl=bremen02.c.736.de
