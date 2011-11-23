@@ -1,0 +1,42 @@
+<html>
+  <head>
+    <title>bremen-bib</title>
+  </head>
+
+  <body>
+  <div id="mapdiv"></div>
+  <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
+  <script>
+    map = new OpenLayers.Map("mapdiv");
+    map.addLayer(new OpenLayers.Layer.OSM());
+ 
+    var jdata = {{ jdata|safe }};
+
+    var markers = new OpenLayers.Layer.Markers( "Markers" );
+    map.addLayer(markers);
+ 
+    for (var i in jdata) {
+        d = jdata[i];
+        var lonLat = new OpenLayers.LonLat(d.lon, d.lat)
+            .transform(
+                new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
+                map.getProjectionObject() // to Spherical Mercator Projection
+            );
+        markers.addMarker(new OpenLayers.Marker(lonLat));
+        console.log(d.lon + ", " + d.lat + ": " + d.Name);
+    }
+
+    var center = new OpenLayers.LonLat( {{ lon }} , {{ lat }} )
+          .transform(
+            new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
+            map.getProjectionObject() // to Spherical Mercator Projection
+          );
+ 
+    var zoom=14;
+ 
+    map.setCenter (center, zoom);
+
+  </script>
+
+  </body>
+</html>
